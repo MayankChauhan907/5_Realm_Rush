@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] Transform _gameobjectToPan;
-    [SerializeField] Transform _targetEnemy;
+    Transform _targetEnemy;
     [SerializeField] float _attackeRange = 20;
     [SerializeField] ParticleSystem _bullets;
 

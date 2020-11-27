@@ -8,6 +8,8 @@ public class WayPoint : MonoBehaviour
     Vector2Int _gridPos;
     const int _gridSize = 10;
     public WayPoint ExploredFrom;
+    [SerializeField] public bool _isplacebled = true;
+    [SerializeField] Tower _towerPrefab;
 
     public int GetGridSize()
     {
@@ -26,5 +28,21 @@ public class WayPoint : MonoBehaviour
     {
         var TopMeshRenderer = transform.Find("Top").GetComponent<MeshRenderer>();
         TopMeshRenderer.material.color = color;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (_isplacebled)
+            {
+                Instantiate(_towerPrefab, transform.position, Quaternion.identity);
+                _isplacebled = false;
+            }
+            else
+            {
+                print("Can't Place Here");
+            }
+        }
     }
 }

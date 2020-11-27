@@ -31,7 +31,6 @@ public class PathFinding : MonoBehaviour
     private void CalculatePath()
     {
         LoadBlocks();
-        SetStartAndEndColor();
         BreadthFirstSearch();
         CreatePath();
     }
@@ -51,12 +50,6 @@ public class PathFinding : MonoBehaviour
                 grid.Add(GridPos, wayPoint);
             }
         }
-    }
-
-    private void SetStartAndEndColor()
-    {
-        _startPonit.SetColor(Color.red);
-        _endPoint.SetColor(Color.black);
     }
 
     private void BreadthFirstSearch()
@@ -109,17 +102,24 @@ public class PathFinding : MonoBehaviour
 
     private void CreatePath()
     {
-        path.Add(_endPoint);
-        WayPoint Previous = _endPoint.ExploredFrom;
+        SetAsPath(_endPoint);
 
+        WayPoint Previous = _endPoint.ExploredFrom;
         while (Previous != _startPonit)
         {
-            path.Add(Previous);
+            SetAsPath(Previous);
             Previous = Previous.ExploredFrom;
         }
 
         path.Add(_startPonit);
+        _startPonit._isplacebled = false;
         path.Reverse();
+    }
+
+    private void SetAsPath(WayPoint wayPoint)
+    {
+        path.Add(wayPoint);
+        wayPoint._isplacebled = false;
     }
 
 }
