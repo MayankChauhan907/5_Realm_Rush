@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetTargetEnemy();
         if (_targetEnemy)
         {
             _gameobjectToPan.LookAt(_targetEnemy);
@@ -22,6 +23,33 @@ public class Tower : MonoBehaviour
             Shoot(false);
         }
 
+    }
+
+    void SetTargetEnemy()
+    {
+        var Enemies = FindObjectsOfType<Enemy>();
+        if (Enemies.Length == 0) { return; }
+
+        Transform ClosestEnemy = Enemies[0].transform;
+
+        foreach (Enemy TestEnemy in Enemies)
+        {
+            ClosestEnemy = GetClosestEnemy(ClosestEnemy, TestEnemy.transform);
+        }
+
+        _targetEnemy = ClosestEnemy;
+    }
+
+    private Transform GetClosestEnemy(Transform TargetA, Transform TargetB)
+    {
+        var DistoA = Vector3.Distance(transform.position, TargetA.position);
+        var DistoB = Vector3.Distance(transform.position, TargetB.position);
+
+        if (DistoA < DistoB)
+        {
+            return TargetA;
+        }
+        return TargetB;
     }
 
     void CheckForEnemy()

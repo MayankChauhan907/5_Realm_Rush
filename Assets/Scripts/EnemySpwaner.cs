@@ -16,7 +16,9 @@ public class EnemySpwaner : MonoBehaviour
     {
         while (true) // Forever
         {
+            Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(_timeBetweenSpwan);
         }
     }
 }
+
