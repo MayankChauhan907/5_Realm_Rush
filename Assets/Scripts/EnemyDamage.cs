@@ -27,7 +27,7 @@ public class EnemyDamage : MonoBehaviour
     {
         var DeathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
         DeathParticles.Play();
-        Destroy(DeathParticles.gameObject, 1f);
+        Destroy(DeathParticles.gameObject, DeathParticles.main.duration);
         Destroy(gameObject);
     }
 }

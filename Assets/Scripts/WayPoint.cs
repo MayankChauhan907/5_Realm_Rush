@@ -9,7 +9,6 @@ public class WayPoint : MonoBehaviour
     const int _gridSize = 10;
     public WayPoint ExploredFrom;
     [SerializeField] public bool _isplacebled = true;
-    [SerializeField] Tower _towerPrefab;
 
     public int GetGridSize()
     {
@@ -36,8 +35,7 @@ public class WayPoint : MonoBehaviour
         {
             if (_isplacebled)
             {
-                Instantiate(_towerPrefab, transform.position, Quaternion.identity);
-                _isplacebled = false;
+                FindObjectOfType<TowerBase>().AddTower(this);
             }
             else
             {
